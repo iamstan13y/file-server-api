@@ -13,17 +13,25 @@ namespace File_Storage_System.Controllers
     [ApiController]
     public class UploadController : ControllerBase
     {
+        private readonly FileDatabaseContext _context;
+
+        public UploadController(FileDatabaseContext context)
+        {
+            _context = context;
+        }
+
         [HttpPost]
         private async Task<IActionResult> UploadFile(IFormFile file, string applicationId)
         {
-            var basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\Files\\");
-            var fileName = Path.GetFileName(file.FileName);
-            var url = Path.Combine($"{basePath}{DateTime.Now.Ticks}", fileName);
+            string basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\Files\\");
+            string fileName = Path.GetFileName(file.FileName);
+            string url = Path.Combine($"{basePath}{DateTime.Now.Ticks}", fileName);
 
                 using (var stream = new FileStream(url, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
+
                 var newFile = new FileUpload
                 {
                     FileName = fileName,
@@ -32,8 +40,10 @@ namespace File_Storage_System.Controllers
                     DateCreated = DateTime.Now.Date
                 };
 
-                context.FilesOnFileSystem.Add(newFile);
-                context.SaveChanges();
+                _context.FileUpload.Add(newFile);
+                _context.SaveChanges();
+
+            return Ok(url);
             }
         }
     }
