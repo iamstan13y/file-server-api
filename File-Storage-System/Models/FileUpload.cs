@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace File_Storage_System.Models
 {
+    [Table("Files")]
     public class FileUpload
     {
         [Key]
