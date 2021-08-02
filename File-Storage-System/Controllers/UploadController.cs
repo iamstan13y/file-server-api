@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+
 
 namespace File_Storage_System.Controllers
 {
@@ -21,11 +24,11 @@ namespace File_Storage_System.Controllers
         }
 
         [HttpPost]
-        private async Task<IActionResult> UploadFile(IFormFile file, string applicationId)
+        public async Task<IActionResult> Post(IFormFile file, string applicationId)
         {
             string basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\Files\\");
             string fileName = Path.GetFileName(file.FileName);
-            string url = Path.Combine($"{basePath}{DateTime.Now.Ticks}", fileName);
+            string url = string.Concat($"{basePath}{DateTime.Now.Ticks}", fileName);
 
                 using (var stream = new FileStream(url, FileMode.Create))
                 {
@@ -37,14 +40,13 @@ namespace File_Storage_System.Controllers
                     FileName = fileName,
                     Url= url,
                     ApplicationId = applicationId,
-                    DateCreated = DateTime.Now.Date
+                    DateCreated = DateTime.Now
                 };
 
                 _context.FileUpload.Add(newFile);
                 _context.SaveChanges();
 
             return Ok(url);
-            }
         }
     }
 }
