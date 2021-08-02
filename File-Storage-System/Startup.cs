@@ -61,7 +61,7 @@ namespace File_Storage_System
                 endpoints.MapControllers();
             });
 
-            app.UseStaticFiles();// For the wwwroot folder
+            app.UseStaticFiles();
 
             app.UseStaticFiles(new StaticFileOptions
             {
@@ -70,7 +70,6 @@ namespace File_Storage_System
                 RequestPath = "/Files"
             });
 
-            //Enable directory browsing
             app.UseDirectoryBrowser(new DirectoryBrowserOptions
             {
                 FileProvider = new PhysicalFileProvider(
