@@ -25,9 +25,11 @@ namespace File_Storage_System.Controllers
         {
             string basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\Files\\");
             string fileName = Path.GetFileName(file.FileName);
-            string url = string.Concat($"{basePath}{DateTime.Now.Ticks}", fileName);
+            string newFileName = string.Concat($"{DateTime.Now.Ticks}", fileName);
+            string filePath = string.Concat($"{basePath}", newFileName);
 
-                using (var stream = new FileStream(url, FileMode.Create))
+            string url = $"{ApiData.BaseURL}Files/{newFileName}";
+                using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
