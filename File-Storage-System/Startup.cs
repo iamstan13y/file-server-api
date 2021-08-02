@@ -28,6 +28,7 @@ namespace File_Storage_System
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ApiData.BaseURL = Configuration["ServiceUrls:FileStorageAPI"];
             var connection = Configuration.GetConnectionString("DbConnection");
             services.AddDbContext<FileDatabaseContext>(options => options.UseSqlServer(connection));
             services.AddControllers();
