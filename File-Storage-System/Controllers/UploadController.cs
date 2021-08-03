@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace File_Storage_System.Controllers
@@ -29,23 +27,23 @@ namespace File_Storage_System.Controllers
             string filePath = string.Concat($"{basePath}", newFileName);
 
             string url = $"{ApiData.BaseURL}Files/{newFileName}";
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
 
-                var newFile = new FileUpload
-                {
-                    FileName = fileName,
-                    Url= url,
-                    ApplicationId = applicationId,
-                    DateCreated = DateTime.Now
-                };
+            var newFile = new FileUpload
+            {
+                FileName = fileName,
+                Url= url,
+                ApplicationId = applicationId,
+                DateCreated = DateTime.Now
+            };
 
-                _context.FileUpload.Add(newFile);
-                _context.SaveChanges();
+            _context.FileUpload.Add(newFile);
+            _context.SaveChanges();
 
-            return Ok(url);
+        return Ok(url);
         }
     }
 }
