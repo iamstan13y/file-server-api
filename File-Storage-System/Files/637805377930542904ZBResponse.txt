@@ -1,0 +1,118 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <ns2:pickPaymentResponse xmlns:ns2="http://payment.datacentre.co.zw/">
+         <return>
+            <amount>6000.0</amount>
+            <id>KNQ180571497983</id>
+            <nr1>571110091</nr1>
+            <nr2>00002 BARCLAYS</nr2>
+            <nr3>CTP RTGS</nr3>
+            <nr4>CBZ</nr4>
+            <picked>true</picked>
+            <reference>BARBP17236A02986</reference>
+            <source>4624157340080</source>
+            <status>SUCCESSFUL</status>
+            <tcd>D68</tcd>
+            <transactionDate>2017-08-24 14:48:44.029</transactionDate>
+         </return>
+         <return>
+            <amount>3738620.0</amount>
+            <id>MPO315946800977</id>
+            <nr1>FT21342MKP1Y</nr1>
+            <nr2>000020 STEWARD BANK</nr2>
+            <nr3>CTP RTGS</nr3>
+            <nr4>CBZ</nr4>
+            <picked>true</picked>
+            <reference>STBLP21342A03676</reference>
+            <source>4624157340080</source>
+            <status>SUCCESSFUL</status>
+            <tcd>D68</tcd>
+            <transactionDate>2021-12-08 11:03:47.023</transactionDate>
+         </return>
+         <return>
+            <amount>6430000.0</amount>
+            <id>HCQ3194248102661</id>
+            <nr1>S00034297253</nr1>
+            <nr2>Lois T Chipisa</nr2>
+            <nr3>CTP RTGS</nr3>
+            <nr4>CBZ</nr4>
+            <picked>true</picked>
+            <reference>S00034297253</reference>
+            <source>4624157340080</source>
+            <status>SUCCESSFUL</status>
+            <tcd>G57</tcd>
+            <transactionDate>2022-01-17 17:10:36.312</transactionDate>
+         </return>
+         <return>
+            <amount>2210000.0</amount>
+            <id>QEW3194248102701</id>
+            <nr1>S00034297284</nr1>
+            <nr2>ONIAS DUBE</nr2>
+            <nr3>CTP RTGS</nr3>
+            <nr4>CBZ</nr4>
+            <picked>true</picked>
+            <reference>S00034297284</reference>
+            <source>4624157340080</source>
+            <status>SUCCESSFUL</status>
+            <tcd>G57</tcd>
+            <transactionDate>2022-01-17 17:10:36.316</transactionDate>
+         </return>
+         <return>
+            <amount>1960000.0</amount>
+            <id>IWJ3194248102741</id>
+            <nr1>S00034297297</nr1>
+            <nr2>BRIAN C RUFASHA</nr2>
+            <nr3>CTP RTGS</nr3>
+            <nr4>CBZ</nr4>
+            <picked>true</picked>
+            <reference>S00034297297</reference>
+            <source>4624157340080</source>
+            <status>SUCCESSFUL</status>
+            <tcd>G57</tcd>
+            <transactionDate>2022-01-17 17:10:36.32</transactionDate>
+         </return>
+         <return>
+            <amount>760000.0</amount>
+            <id>ASB3194248102781</id>
+            <nr1>S00034297309</nr1>
+            <nr2>KWANELE MOYO</nr2>
+            <nr3>CTP RTGS</nr3>
+            <nr4>CBZ</nr4>
+            <picked>true</picked>
+            <reference>S00034297309</reference>
+            <source>4624157340080</source>
+            <status>SUCCESSFUL</status>
+            <tcd>G57</tcd>
+            <transactionDate>2022-01-17 17:10:36.324</transactionDate>
+         </return>
+         <return>
+            <amount>1960000.0</amount>
+            <id>OGO3194248102821</id>
+            <nr1>S00034297321</nr1>
+            <nr2>MUNYARADZI M MUPASIRI</nr2>
+            <nr3>CTP RTGS</nr3>
+            <nr4>CBZ</nr4>
+            <picked>true</picked>
+            <reference>S00034297321</reference>
+            <source>4624157340080</source>
+            <status>SUCCESSFUL</status>
+            <tcd>G57</tcd>
+            <transactionDate>2022-01-17 17:10:36.328</transactionDate>
+         </return>
+         <return>
+            <amount>1960000.0</amount>
+            <id>WFH3194248102861</id>
+            <nr1>S00034297331</nr1>
+            <nr2>NOMAQHOWE SIBANDA A</nr2>
+            <nr3>CTP RTGS</nr3>
+            <nr4>CBZ</nr4>
+            <picked>true</picked>
+            <reference>S00034297331</reference>
+            <source>4624157340080</source>
+            <status>SUCCESSFUL</status>
+            <tcd>G57</tcd>
+            <transactionDate>2022-01-17 17:10:36.332</transactionDate>
+         </return>
+      </ns2:pickPaymentResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
