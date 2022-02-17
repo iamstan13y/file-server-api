@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ArrayOfMimeMap>
+<!--
+  By modifying this file you can add custom MIME-type-to-file-extension mappings. Also you can override Telerik Fiddler's default ones. Example:
+  <MimeMap>
+    <MimeType>mime/type</MimeType>
+    <FileExtension>.ext</FileExtension>
+  </MimeMap>
+  -->
+</ArrayOfMimeMap>

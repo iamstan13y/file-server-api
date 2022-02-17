@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="app\heroku_output\Files\" />
     <Folder Include="Logs\" />
     <Folder Include="Files\" />
   </ItemGroup>

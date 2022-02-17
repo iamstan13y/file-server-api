@@ -21,7 +21,7 @@ namespace File_Storage_System.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(IFormFile file, string applicationId)
         {
-            string basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\Files\\");
+            string basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\app\\heroku_output\\Files\\");
             string fileName = Path.GetFileName(file.FileName);
             string newFileName = string.Concat($"{DateTime.Now.Ticks}", fileName);
             string filePath = string.Concat($"{basePath}", newFileName);
