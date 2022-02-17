@@ -63,14 +63,14 @@ namespace File_Storage_System
             {
                 FileProvider = new PhysicalFileProvider(
                             Path.Combine(Directory.GetCurrentDirectory(), "Files")),
-                RequestPath = "/app/heroku_output/Files"
+                RequestPath = "/Files"
             });
 
             app.UseDirectoryBrowser(new DirectoryBrowserOptions
             {
                 FileProvider = new PhysicalFileProvider(
                             Path.Combine(Directory.GetCurrentDirectory(), "Files")),
-                RequestPath = "/app/heroku_output/Files"
+                RequestPath = "/Files"
             });
         }
     }
