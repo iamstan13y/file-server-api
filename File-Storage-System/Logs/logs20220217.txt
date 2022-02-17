@@ -1,0 +1,7 @@
+2022-02-17 08:10:37.753 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-02-17 08:10:37.971 +02:00 [INF] Hosting environment: Development
+2022-02-17 08:10:37.972 +02:00 [INF] Content root path: C:\Users\Keith Stanley\source\repos\File-Storage-System\File-Storage-System
+2022-02-17 08:10:38.016 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/index.html - -
+2022-02-17 08:10:38.682 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/index.html - - - 200 - text/html;charset=utf-8 642.9439ms
+2022-02-17 08:10:42.160 +02:00 [INF] Request starting HTTP/2 GET https://localhost:44337/swagger/v1/swagger.json - -
+2022-02-17 08:10:42.840 +02:00 [INF] Request finished HTTP/2 GET https://localhost:44337/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 679.6157ms
