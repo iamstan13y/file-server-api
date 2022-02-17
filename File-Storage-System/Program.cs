@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
+using System;
 
 namespace File_Storage_System
 {
@@ -9,21 +11,22 @@ namespace File_Storage_System
     {
         public static void Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
+
             try
             {
-                var configuration = new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-
-                Log.Logger = new LoggerConfiguration()
-                    .ReadFrom.Configuration(configuration)
-                    .CreateLogger();
-
-                Log.Logger = new LoggerConfiguration()
-                    .WriteTo.File("Logs/logs.txt", rollingInterval: RollingInterval.Day)
-                    .CreateLogger();
-
+                Log.Information("Application Starting Up");
                 CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "The app failed to start correctly!");
             }
             finally
             {

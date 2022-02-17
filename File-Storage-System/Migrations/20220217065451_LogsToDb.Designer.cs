@@ -4,14 +4,16 @@ using File_Storage_System.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace File_Storage_System.Migrations
 {
     [DbContext(typeof(FileDatabaseContext))]
-    partial class FileDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220217065451_LogsToDb")]
+    partial class LogsToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

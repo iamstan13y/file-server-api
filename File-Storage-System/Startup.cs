@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.IO;
 
 namespace File_Storage_System
@@ -55,6 +56,8 @@ namespace File_Storage_System
             });
 
             app.UseStaticFiles();
+
+            app.UseSerilogRequestLogging();
 
             app.UseStaticFiles(new StaticFileOptions
             {

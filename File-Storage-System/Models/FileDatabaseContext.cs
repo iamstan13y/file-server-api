@@ -11,5 +11,6 @@ namespace File_Storage_System.Models
         }
 
         public DbSet<FileUpload> FileUpload { get; set; }
+        public DbSet<Log> Logs { get; set; }
     }
 }

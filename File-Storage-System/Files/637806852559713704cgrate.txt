@@ -1,0 +1,52 @@
+To be done:
+-Test getting account balance. (Failing with authentication 'Anonymous')
+-Process customer payment.
+-Query the payment.
+-Reverse the payment.
+
+
+
+
+Task to Do
+Endpoint
+Validate Customer Account
+No saving, just check account
+
+Check account balance
+
+Make Payment
+	- Validate request
+		- No duplicate paymentReference [*]
+		- Validate number (ATTRIBUTE) [*]
+		- Validate applicationId [*]
+		- Validate Amount [-]
+		- Return Url [*]
+	- Log the request (Serilog) [*]
+	- Save the payment (Pending) [*]
+	- Save the log [*]
+	- Make Request [*]
+	- Log response [*]
+	- Update payment (Success Initiation, Failed Initiation) [*]
+	- Create a background process [*]
+	-  Run It [*]
+	- Return result [*]
+	- Check background process [*]
+		- Check transaction status (in sessions of 10 seconds space for max of 6 times) [*]
+		- Update payment [*]
+		- Log response [*]
+		- Post Result to return URL (Use HTTPClient);
+
+Reverse Payment
+- Validate request
+		- No duplicate paymentReference 
+		- Validate number (ATTRIBUTE)
+		- Validate applicationId
+		- Validate Amount
+		- Return Url	
+
+
+
+PENDING SUBSCRIBE VALIDATION
+FAILED 
+COMPLETED
+TIMEOUT
