@@ -31,7 +31,8 @@ namespace FileServer.API.Services
                 string newFileName = string.Concat($"JFILE-{DateTime.Now.Ticks.ToString()[12..]}-", fileName);
                 string filePath = string.Concat($"{basePath}", newFileName);
 
-                string url = $"{_configuration["Urls:DevBaseUrl"]}/uploads/{newFileName}";
+                string url = $"{_configuration["Urls:LiveBaseUrl"]}/uploads/{newFileName}";
+                
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 await file.CopyToAsync(stream);
 
