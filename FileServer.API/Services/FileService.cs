@@ -70,7 +70,7 @@ namespace FileServer.API.Services
             }
             catch (Exception ex)
             {
-                return new Result<JFile>(false, new List<string> { ex.ToString() });
+                return new Result<JFile>(false, ex.ToString());
             }
         }
 
