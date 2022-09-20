@@ -10,12 +10,12 @@ namespace FileServer.API.Models.Repository
 
         public FileRepository(ApplicationDbContext context) => _context = context;
 
-        public async Task<Result<ImageFile>> AddAsync(ImageFile imageFile)
+        public async Task<Result<JFile>> AddAsync(JFile imageFile)
         {
             await _context.ImageFiles!.AddAsync(imageFile);
             await _context.SaveChangesAsync();
 
-            return new Result<ImageFile>(imageFile);
+            return new Result<JFile>(imageFile);
         }
 
         public async Task<Result<bool>> DeleteAsync(string fileName)
@@ -29,10 +29,10 @@ namespace FileServer.API.Models.Repository
             return new Result<bool>(true);
         }
 
-        public async Task<Result<IEnumerable<ImageFile>>> GetAllAsync()
+        public async Task<Result<IEnumerable<JFile>>> GetAllAsync()
         {
             var files = await _context.ImageFiles!.ToListAsync();
-            return new Result<IEnumerable<ImageFile>>(files);
+            return new Result<IEnumerable<JFile>>(files);
         }
     }
 }
