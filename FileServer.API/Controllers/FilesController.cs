@@ -21,7 +21,7 @@ namespace FileServer.API.Controllers
             _fileRepository = fileRepository;
         }
 
-        [HttpPost("upload-file")]
+        [HttpPost("upload")]
         [ProducesResponseType(typeof(Result<JFile>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Result<JFile>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UploadFileAsync(IFormFile file)
@@ -35,8 +35,5 @@ namespace FileServer.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Get() => Ok(await _fileRepository.GetAllAsync());
-
-        [HttpDelete]
-        public async Task<IActionResult> Delete([FromQuery] string fileName) => Ok(await _fileService.DeleteFileAsync(fileName));
     }
 }
