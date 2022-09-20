@@ -1,4 +1,4 @@
-﻿using FileServer.API.Models;
+﻿using FileServer.API.Models.Data;
 using FileServer.API.Models.Repository;
 using Microsoft.AspNetCore.Http;
 using ModelLibrary;
@@ -18,7 +18,7 @@ namespace FileServer.API.Services
             _fileRepository = fileRepository;
         }
 
-        public async Task<Result<ImageFile>> UploadFileAsync(IFormFile file)
+        public async Task<Result<JFile>> UploadFileAsync(IFormFile file)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace FileServer.API.Services
                 //    client.UploadFile(_configuration["FtpServer:Url"] + newFileName, WebRequestMethods.Ftp.UploadFile, filePath);
                 //}
 
-                var result = await _fileRepository.AddAsync(new ImageFile
+                var result = await _fileRepository.AddAsync(new JFile
                 {
                     FileName = newFileName,
                     Url = url,
@@ -66,7 +66,7 @@ namespace FileServer.API.Services
             }
             catch (Exception ex)
             {
-                return new Result<ImageFile>(false, new List<string> { ex.ToString() });
+                return new Result<JFile>(false, new List<string> { ex.ToString() });
             }
         }
 
