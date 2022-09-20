@@ -9,6 +9,6 @@ namespace FileServer.API.Models.Data
 
         }
 
-        public DbSet<ImageFile>? ImageFiles { get; set; }
+        public DbSet<JFile>? ImageFiles { get; set; }
     }
 }
