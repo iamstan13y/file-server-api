@@ -33,7 +33,7 @@ namespace FileServer.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get() => Ok(await _fileRepository.GetAllAsync());
+        //[HttpGet]
+        //public async Task<IActionResult> Get() => Ok(await _fileRepository.GetAllAsync());
     }
 }
