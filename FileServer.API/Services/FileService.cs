@@ -26,44 +26,22 @@ namespace FileServer.API.Services
         {
             try
             {
-                string basePath = Path.Combine(Directory.GetCurrentDirectory() + "/Files/");
+                string basePath = Path.Combine(Directory.GetCurrentDirectory() + "/uploads/");
                 string fileName = Path.GetFileName(file.FileName);
-                string newFileName = string.Concat($"ceg-img-{DateTime.Now.Ticks.ToString()[12..]}-", fileName);
+                string newFileName = string.Concat($"JFILE-{DateTime.Now.Ticks.ToString()[12..]}-", fileName);
                 string filePath = string.Concat($"{basePath}", newFileName);
 
-                string url = $"{_configuration["Urls:ProdBaseUrl"]}/uploads/{newFileName}";
+                string url = $"{_configuration["Urls:DevBaseUrl"]}/uploads/{newFileName}";
                 using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(_configuration["FtpServer:Url"] + newFileName);
-                request.Method = WebRequestMethods.Ftp.UploadFile;
-                request.EnableSsl = true;
-                
-                ServicePointManager.Expect100Continue = false;
-
-                // This example assumes the FTP site uses anonymous logon.
-                request.Credentials = new NetworkCredential(_configuration["FtpServer:UserName"], _configuration["FtpServer:Password"]);
-
-                // Copy the contents of the file to the request stream.
-                using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read))
-                {
-                    using Stream requestStream = request.GetRequestStream();
-                    await fileStream.CopyToAsync(requestStream);
-                }
-
-                //using (var client = new WebClient())
-                //{
-                //    client.Credentials = new NetworkCredential(_configuration["FtpServer:UserName"], _configuration["FtpServer:Password"]);
-                //    client.UploadFile(_configuration["FtpServer:Url"] + newFileName, WebRequestMethods.Ftp.UploadFile, filePath);
-                //}
+                await file.CopyToAsync(stream);
 
                 var result = await _fileRepository.AddAsync(new JFile
                 {
                     FileName = newFileName,
                     Url = url,
-                    Path = filePath
+                    Path = filePath,
+                    FileSize = file.Length,
+                    FileType = file.ContentType
                 });
 
                 return result;
@@ -72,21 +50,6 @@ namespace FileServer.API.Services
             {
                 return new Result<JFile>(false, ex.ToString());
             }
-        }
-
-        public async Task<Result<bool>> DeleteFileAsync(string fileName)
-        {
-            var recordIsDeleted = (await _fileRepository.DeleteAsync(fileName)).Data;
-            if (!recordIsDeleted) return new Result<bool>(false);
-
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(_configuration["FtpServer:Url"] + fileName);
-            request.Method = WebRequestMethods.Ftp.DeleteFile;
-            request.Credentials = new NetworkCredential(_configuration["FtpServer:UserName"], _configuration["FtpServer:Password"]);
-
-            using FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            if (response.StatusCode != FtpStatusCode.FileActionOK) return await Task.FromResult(new Result<bool>(false));
-
-            return await Task.FromResult(new Result<bool>(true));
         }
     }
 }
