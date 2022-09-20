@@ -1,4 +1,4 @@
-﻿using FileServer.API.Models;
+﻿using FileServer.API.Models.Data;
 using FileServer.API.Models.Repository;
 using FileServer.API.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -22,8 +22,8 @@ namespace FileServer.API.Controllers
 
         [HttpPost("upload-file")]
         [Authorize]
-        [ProducesResponseType(typeof(Result<ImageFile>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Result<ImageFile>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Result<JFile>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Result<JFile>), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UploadFileAsync(IFormFile file)
         {
             var result = await _fileService.UploadFileAsync(file);
