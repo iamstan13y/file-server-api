@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>File_Storage_System</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>FileServer.API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
