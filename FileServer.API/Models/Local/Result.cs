@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace FileServer.API.Models.Local
+﻿namespace FileServer.API.Models.Local
 {
     public class Result<T>
     {
         public Result() { }
-        
+
         public Result(T Data) => this.Data = Data;
-        
+
         public Result(bool Success, string Message)
         {
             this.Success = Success;
