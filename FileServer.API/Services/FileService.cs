@@ -4,9 +4,7 @@ using FileServer.API.Models.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace FileServer.API.Services
@@ -32,9 +30,9 @@ namespace FileServer.API.Services
                 string filePath = string.Concat($"{basePath}", newFileName);
 
                 string url = $"{_configuration["Urls:LiveBaseUrl"]}/uploads/{newFileName}";
-                
+
                 using (var stream = new FileStream(filePath, FileMode.Create))
-                await file.CopyToAsync(stream);
+                    await file.CopyToAsync(stream);
 
                 var result = await _fileRepository.AddAsync(new JFile
                 {
