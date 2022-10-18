@@ -12,7 +12,7 @@ namespace FileServer.API.Controllers
     public class FilesController : ControllerBase
     {
         private readonly IFileService _fileService;
-        
+
         public FilesController(IFileService fileService) => _fileService = fileService;
 
         [HttpPost("upload")]
