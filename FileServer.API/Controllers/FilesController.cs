@@ -1,6 +1,5 @@
 ﻿using FileServer.API.Models.Data;
 using FileServer.API.Models.Local;
-using FileServer.API.Models.Repository;
 using FileServer.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +12,8 @@ namespace FileServer.API.Controllers
     public class FilesController : ControllerBase
     {
         private readonly IFileService _fileService;
-        private readonly IFileRepository _fileRepository;
-
-        public FilesController(IFileService fileService, IFileRepository fileRepository)
-        {
-            _fileService = fileService;
-            _fileRepository = fileRepository;
-        }
+        
+        public FilesController(IFileService fileService) => _fileService = fileService;
 
         [HttpPost("upload")]
         [ProducesResponseType(typeof(Result<JFile>), StatusCodes.Status200OK)]
@@ -32,8 +26,5 @@ namespace FileServer.API.Controllers
 
             return Ok(result);
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> Get() => Ok(await _fileRepository.GetAllAsync());
     }
 }
