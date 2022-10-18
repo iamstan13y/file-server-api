@@ -65,11 +65,4 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/uploads"
 });
 
-app.UseDirectoryBrowser(new DirectoryBrowserOptions
-{
-    FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
-    RequestPath = "/uploads"
-});
-
 app.Run();
