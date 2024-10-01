@@ -7,48 +7,41 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace FileServer.API.Services
+namespace FileServer.API.Services;
+
+public class FileService(IConfiguration configuration, IFileRepository fileRepository) : IFileService
 {
-    public class FileService : IFileService
+    private readonly IConfiguration _configuration = configuration;
+    private readonly IFileRepository _fileRepository = fileRepository;
+
+	public async Task<Result<JFile>> UploadFileAsync(IFormFile file)
     {
-        private readonly IConfiguration _configuration;
-        private readonly IFileRepository _fileRepository;
-
-        public FileService(IConfiguration configuration, IFileRepository fileRepository)
+        try
         {
-            _configuration = configuration;
-            _fileRepository = fileRepository;
+            string basePath = Path.Combine(Directory.GetCurrentDirectory() + "/uploads/");
+            string fileName = Path.GetFileName(file.FileName);
+            string newFileName = string.Concat($"JFILE-{DateTime.Now.Ticks.ToString()[12..]}-", fileName);
+            string filePath = string.Concat($"{basePath}", newFileName);
+
+            string url = $"{_configuration["Urls:LiveBaseUrl"]}/uploads/{newFileName}";
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+                await file.CopyToAsync(stream);
+
+            var result = await _fileRepository.AddAsync(new JFile
+            {
+                FileName = newFileName,
+                Url = url,
+                Path = filePath,
+                FileSize = file.Length,
+                FileType = file.ContentType
+            });
+
+            return result;
         }
-
-        public async Task<Result<JFile>> UploadFileAsync(IFormFile file)
+        catch (Exception ex)
         {
-            try
-            {
-                string basePath = Path.Combine(Directory.GetCurrentDirectory() + "/uploads/");
-                string fileName = Path.GetFileName(file.FileName);
-                string newFileName = string.Concat($"JFILE-{DateTime.Now.Ticks.ToString()[12..]}-", fileName);
-                string filePath = string.Concat($"{basePath}", newFileName);
-
-                string url = $"{_configuration["Urls:LiveBaseUrl"]}/uploads/{newFileName}";
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                    await file.CopyToAsync(stream);
-
-                var result = await _fileRepository.AddAsync(new JFile
-                {
-                    FileName = newFileName,
-                    Url = url,
-                    Path = filePath,
-                    FileSize = file.Length,
-                    FileType = file.ContentType
-                });
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                return new Result<JFile>(false, ex.ToString());
-            }
+            return new Result<JFile>(false, ex.ToString());
         }
     }
 }
