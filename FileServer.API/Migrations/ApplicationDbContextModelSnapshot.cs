@@ -3,56 +3,53 @@ using System;
 using FileServer.API.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FileServer.API.Migrations
+namespace FileServer.API.Migrations;
+
+[DbContext(typeof(ApplicationDbContext))]
+partial class ApplicationDbContextModelSnapshot : ModelSnapshot
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+        modelBuilder
+            .HasAnnotation("ProductVersion", "6.0.9")
+            .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+        SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("FileServer.API.Models.Data.JFile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity("FileServer.API.Models.Data.JFile", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("DateCreated")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("FileName")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("FileSize")
-                        .HasColumnType("bigint");
+                b.Property<long>("FileSize")
+                    .HasColumnType("bigint");
 
-                    b.Property<string>("FileType")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("FileType")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Path")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Url")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Files");
-                });
+                b.ToTable("Files");
+            });
 #pragma warning restore 612, 618
-        }
     }
 }
