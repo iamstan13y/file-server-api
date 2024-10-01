@@ -5,37 +5,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FileServer.API.Models.Repository
+namespace FileServer.API.Models.Repository;
+
+public class FileRepository(ApplicationDbContext context) : IFileRepository
 {
-    public class FileRepository : IFileRepository
+    private readonly ApplicationDbContext _context = context;
+
+	public async Task<Result<JFile>> AddAsync(JFile imageFile)
     {
-        private readonly ApplicationDbContext _context;
+        await _context.Files!.AddAsync(imageFile);
+        await _context.SaveChangesAsync();
 
-        public FileRepository(ApplicationDbContext context) => _context = context;
+        return new Result<JFile>(imageFile);
+    }
 
-        public async Task<Result<JFile>> AddAsync(JFile imageFile)
-        {
-            await _context.Files!.AddAsync(imageFile);
-            await _context.SaveChangesAsync();
+    public async Task<Result<bool>> DeleteAsync(string fileName)
+    {
+        var file = await _context.Files!.Where(x => x.FileName == fileName).FirstOrDefaultAsync();
+        if (file == null) return new Result<bool>(false, "File record not found.");
 
-            return new Result<JFile>(imageFile);
-        }
+        _context.Files!.Remove(file);
+        await _context.SaveChangesAsync();
 
-        public async Task<Result<bool>> DeleteAsync(string fileName)
-        {
-            var file = await _context.Files!.Where(x => x.FileName == fileName).FirstOrDefaultAsync();
-            if (file == null) return new Result<bool>(false, "File record not found.");
+        return new Result<bool>(true);
+    }
 
-            _context.Files!.Remove(file);
-            await _context.SaveChangesAsync();
-
-            return new Result<bool>(true);
-        }
-
-        public async Task<Result<IEnumerable<JFile>>> GetAllAsync()
-        {
-            var files = await _context.Files!.ToListAsync();
-            return new Result<IEnumerable<JFile>>(files);
-        }
+    public async Task<Result<IEnumerable<JFile>>> GetAllAsync()
+    {
+        var files = await _context.Files!.ToListAsync();
+        return new Result<IEnumerable<JFile>>(files);
     }
 }
