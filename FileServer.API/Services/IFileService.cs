@@ -3,10 +3,9 @@ using FileServer.API.Models.Local;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace FileServer.API.Services
+namespace FileServer.API.Services;
+
+public interface IFileService
 {
-    public interface IFileService
-    {
-        Task<Result<JFile>> UploadFileAsync(IFormFile formFile);
-    }
+    Task<Result<JFile>> UploadFileAsync(IFormFile formFile);
 }
